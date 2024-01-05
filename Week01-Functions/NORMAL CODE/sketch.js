@@ -19,6 +19,7 @@ function setup() {
     circleYPos = -playerYSize / 2;
     circleXPos = random(25, 426);
     
+    
     textAlign(CENTER, CENTER);
     strokeWeight(5);
     textFont('Avant Garde');
@@ -73,16 +74,5 @@ function draw() {
         } else {
             lives -= 1;
         }
-    }
-}
-
-function mouseClicked() {
-    if (lives === 0) {
-        lives = 5;
-
-        speed = 2;
-        
-        circleYPos = -playerYSize / 2;
-        circleXPos = random(25, 426);
     }
 }
