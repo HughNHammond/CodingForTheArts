@@ -19,7 +19,6 @@ function setup() {
     circleYPos = -playerYSize / 2;
     circleXPos = random(25, 426);
     
-    
     textAlign(CENTER, CENTER);
     strokeWeight(5);
     textFont('Avant Garde');
