@@ -9,11 +9,6 @@ function draw() {
 
 function drawSquare() {
     let fillCol = [72, 61, 139]; // store as an array!
-    let x = 100;
-    let y = 200;
-    let squareWidth = 50;
-    let squareHeight = 50;
-
     fill(fillCol)
-    rect(x, y, squareWidth, squareHeight);
+    rect(100, 200, 50, 50);
 }
