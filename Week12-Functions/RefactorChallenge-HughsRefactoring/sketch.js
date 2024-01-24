@@ -84,8 +84,7 @@ function checkIfOutOfLives() {
 
 function checkIfPlayerCaughtBall() {
     if (circleXPos >= mouseX - playerXSize / 2 && circleXPos <= mouseX + playerXSize / 2 && circleYPos > playerYPos) {
-        circleYPos = -playerYSize / 2;
-        circleXPos = random(25, 426);
+        setInitialBallConditions();
         speed += 0.5;
         score += 1;
     }
