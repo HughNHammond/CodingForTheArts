@@ -15,12 +15,8 @@ function setup() {
 
 function draw() {
     background(245);
-    //display(sprite) //this is our custom function we make below!
-}
-
-function display() {
-    imageMode(CENTER);
-    image(coinSprite, mouseX, mouseY, 50, 50);
+    coin1.display();
+    coin2.display();
 }
 
 class Coin {
