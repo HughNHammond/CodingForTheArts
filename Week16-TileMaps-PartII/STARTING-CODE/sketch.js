@@ -44,16 +44,9 @@ class Tile {
 
         //LABEL
         noStroke();
-        noFill();
+        fill(255);
         textAlign(LEFT, TOP);
-
-        let twoDigitID;
-        if (this.tileID < 10) { //if only one digit...
-            twoDigitID = "0" + this.tileID; // adds a "0" to the front of single digit tileIDs to make it 2 digits
-        } else {
-            twoDigitID = this.tileID; // or just use the original ID.
-        }
         
-        text(twoDigitID, this.x, this.y);
+        text(this.tileID, this.x, this.y);
     }
 }
