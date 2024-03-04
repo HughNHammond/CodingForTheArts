@@ -269,10 +269,11 @@ class Player {
                     this.isFalling = true;
                 }
 
-                this.setYDirection();
-                velY = this.dirY * this.ySpeed;
+            this.setYDirection();
+            velY = this.dirY * this.ySpeed;
         }
-        this.setYDirection();
+
+        this.setYDirection(); //updates y direction one last time before moving, just in case!
 
 
         //DEBUG INFO
