@@ -1,57 +1,64 @@
 //INITIALISE VARIABLES FOR TILEMAP
 let tilemap = [];
-let numDown = 10;
-let numAcross = 10;
 let tileSize = 50;
+let numAcross = 20;
+let numDown = 10;
 let textures = [];
 
-let graphicMap = [ 
-//         THIS IS OUR Y AXIS
-//   0  1  2  3  4  5  6  7  8  9 
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 0
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 1
-    [0, 0, 0, 1, 0, 0, 0, 0, 0, 0], // 2
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 3
-    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0], // 4    THIS IS OUR X AXIS
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 5
-    [0, 0, 0, 0, 0, 0, 0, 1, 0, 0], // 6
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0], // 7
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 8
-    [0, 1, 1, 0, 0, 0, 0, 0, 0, 1]  // 9
-]
+let graphicMap = [
+        //THIS IS THE Y AXIS
+  // 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], //0
+    [1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1], //1
+    [1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1], //2
+    [1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1], //3
+    [1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1], //4    THIS IS THE X AXIS
+    [1, 2, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1], //5
+    [1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1, 1, 1], //6
+    [1, 1, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1, 1, 1], //7
+    [1, 1, 1, 1, 1, 1, 1, 1, 2, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], //8
+    [1, 1, 1, 1, 1, 1, 1, 1, 2, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]  //9
+    ]
 
-let tileRules = [ 
-//         THIS IS OUR Y AXIS
-//   0  1  2  3  4  5  6  7  8  9 
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 0
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 1
-    [0, 0, 0, 1, 0, 0, 0, 0, 0, 0], // 2
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 3
-    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0], // 4    THIS IS OUR X AXIS
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 5
-    [0, 0, 0, 0, 0, 0, 0, 1, 0, 0], // 6
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0], // 7
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 8
-    [0, 1, 1, 0, 0, 0, 0, 0, 0, 1]  // 9
-]
+    let tileRules = [
+
+        //0 = empty space
+        //1 = ground
+        //2 = unwalkable
+
+            //THIS IS THE Y AXIS
+    // 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19
+      [2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], //0
+      [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2], //1
+      [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2], //2
+      [2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2], //3
+      [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2], //4   THIS IS THE X AXIS
+      [2, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2], //5
+      [2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2], //6
+      [2, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2], //7
+      [2, 2, 1, 1, 1, 2, 1, 1, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2], //8
+      [2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]  //9
+    ]
 
 //INITIALISE VARIABLES FOR PLAYER
 let player;
 let playerSprite;
-let playerSpeed = 5;
+let xSpeed = 5; //MUST BE A DIVISOR OF YOUR TILESIZE. SETS HOW FAST PLAYER MOVES HORIZONTALLY.
+let ySpeed = 10; //MUST BE A DIVISOR OF YOUR TILESIZE. SETS HOW FAST PLAYER MOVES VERTICALLY.
+let jumpHeight = 100; //MUST BE A MULTIPLIER OF YOUR YSPEED! SETS HOW HIGH THE PLAYER CAN JUMP.
 let playerSize = tileSize;
 
 function preload() {
-    //tilemap textures
-    textures[0] = loadImage("grassy.png");
-    textures[1] = loadImage("stone.png");
+    textures[0] = loadImage("void_50x.png");
+    textures[1] = loadImage("wall_50x.png");
+    textures[2] = loadImage("crack-l_50x.png");
+    textures[3] = loadImage("crack-r_50x.png");
 
-    //Player sprite
-    playerSprite = loadImage("librarian-r.png");
+    playerSprite = loadImage("librarian-r.png")
 }
 
 function setup() {
-    createCanvas(500, 500);
+    createCanvas(1000, 500); // 1000 = numAcross * tilesize; 500 = numDown * tileSize;
 
     let tileID = 0; // sets our tileID for the first tile we'll make
 
@@ -67,11 +74,11 @@ function setup() {
 
             tileID++;
         }
-    }
-    //Tile creation finished
-
+    } //Tile creation finished
+    
     //Create Player
-    player = new Player(playerSprite, 3, 4, tileSize, playerSpeed, tileSize, tileRules);
+    player = new Player(playerSprite, 3, 2, tileSize, xSpeed, ySpeed, jumpHeight, tileSize, tileRules); // THIS LINE CREATES OUR PLAYER, 
+                                                                                                        // CHECK PLAYER CONSTRUCTOR CLASS FOR VARIABLE ORDER
 }
 
 function draw() {
@@ -81,21 +88,26 @@ function draw() {
     for (let across = 0; across < numAcross; across++) {
         for (let down = 0; down < numDown; down++) {
             tilemap[across][down].display(); // runs display() method for each tile!
-            tilemap[across][down].debug(); // runs debug() method for each tile!
+            //tilemap[across][down].debug(); // runs debug() method for each tile!
         }
     }
     // Finishes looping through all tiles within each draw() loop
 
-    player.display();
-    player.move();
+    player.update(); //runs code in player update method once per frame 
 }
 
-function keyPressed() {
-    player.setDirection();
+function keyPressed() { //this will trigger every time a key is presed
+    if (!player.isJumping && !player.isFalling && player.isGrounded) { //checks if player.isJUMPING = false, player.isFalling = false, AND player.isGrounded = true
+        //Check if key is space bar (our jump button).
+        if (key === " ") {
+            player.isJumping = true;
+            player.jumpTarget = player.yPos - player.jumpDistance;
+        }
+    }
 }
 
 class Player {
-    constructor(sprite, startAcross, startDown, size, speed, tileSize, tileRules) {
+    constructor(sprite, startAcross, startDown, size, xSpeed, ySpeed, jumpHeight, tileSize, tileRules) {
         //Attach sprite to key in object
         this.sprite = sprite;
 
@@ -109,7 +121,8 @@ class Player {
 
         //storing size and speed
         this.size = size;
-        this.speed = speed;
+        this.xSpeed = xSpeed;
+        this.ySpeed = ySpeed;
 
         //Check rules/collisions for the tile the player wants to move to (target Tile)
         this.tileRules = tileRules;
@@ -119,103 +132,106 @@ class Player {
         //what direction the player will travel in
         this.dirX = 0;
         this.dirY = 0;
+
+        //Booleans to set player y/jump state
+        this.isJumping = false;
+        this.isFalling = false;
+        this.isGrounded = true;
+
+        //Setting max Jump Height
+        this.jumpHeight = jumpHeight;
+
+        //store empty variable called "jumpTarget" that we will reference later.
+        this.jumpTarget;
+
+        //PLAYER CORNER COLLISION TRACKING
+        //Initialising X and Y Variables
+        this.playerLeft;
+        this.playerRight;
+        this.playerTop;
+        this.playerBottom;
+
+        //Initialising Corner Coordinate Objects
+        this.topLeft = {};
+        this.topRight = {};
+        this.bottomLeft = {};
+        this.bottomRight = {};
         
-        //whether the player is currently moving to another tile
-        this.isMoving = false;
-        
-        //the x/y position of the tile the player is moving to (the target)
-        this.tx = this.xPos; //set these to the initial player pos
-        this.ty = this.yPos;
+        ////Collision Padding
+        this.collisionXPadding = 10;
+        this.collisionYPadding = 5;
     }
 
-    setDirection() {
-        //Check if we're NOT currently moving...
-        if (!this.isMoving) {
-            //if not, then let's set the direction the player is travelling!
+    update() { // CALLED FROM DRAW() ABOVE SO CODE WILL RUN ONCE PER FRAME
+        this.trackCorners();
+        
+        this.display();
+        this.debug();
+    }
 
-            //UP
-            if (key === "w") {
-                this.dirX = 0;
-                this.dirY = -1; //direction is up!
-            }
+    trackCorners() { //Tracks the corner values of the player
+        //X and Y Variables
+        this.playerLeft = this.xPos + this.collisionXPadding;
+        this.playerRight = this.xPos + this.tileSize - 1 - this.collisionXPadding;
+        this.playerTop = this.yPos + this.collisionYPadding;
+        this.playerBottom = this.yPos + this.tileSize - 1;
 
-            //DOWN
-            if (key === "s") {
-                this.dirX = 0;
-                this.dirY = 1; //direction is down!
-            }
-
-            //LEFT
-            if (key === "a") {
-                this.dirX = -1; //direction is left!
-                this.dirY = 0; 
-            }
-
-            //RIGHT
-            if (key === "d") {
-                this.dirX = 1; //direction is right!
-                this.dirY = 0;
-            }
-
-            //With the direction set, we can now move to the next code block to check if we can move!
-            this.checkTargetTile();
+        //Corner Coordinate Objects
+        this.topLeft = {
+            x: this.playerLeft,
+            y: this.playerTop
+        }
+        this.topRight = {
+            x: this.playerRight,
+            y: this.playerTop
+        }
+        this.bottomLeft = {
+            x: this.playerLeft,
+            y: this.playerBottom
+        }
+        this.bottomRight = {
+            x: this.playerRight,
+            y: this.playerBottom
         }
     }
 
-    //This checks what tile the player wants to move to and if
-    //the player is allowed to move there
-    checkTargetTile() {
-        //First, get what tile the player is currently on
-        this.across = Math.floor(this.xPos / this.tileSize);
-        this.down = Math.floor(this.yPos / this.tileSize);
-
-        //Calculate the coordinates of the target tile
-        let nextTileHorizontal = this.across + this.dirX;
-        let nextTileVertical = this.down + this.dirY;
-
-        //check is that tile is in bounds of the map
-        // remember: && means AND (i.e. below is asking if ALL conditions are true)
-        if (
-            
-            nextTileHorizontal >= 0 && //top of map
-            nextTileHorizontal < numAcross && //bottom of map
-            nextTileVertical >= 0 && //left edge of map
-            nextTileVertical < numDown //right edge of map
-        ) {
-            //if it is in bounds, have we set it as moveable in our ruleMap:
-            if (this.tileRules[nextTileVertical][nextTileHorizontal] != 1) { // remember we have to swap these!
-                //if the target tile is walkable, then...
-                //...calculate the precise x and y coordinate of the target tile...
-                this.tx = nextTileHorizontal * this.tileSize;
-                this.ty = nextTileVertical * this.tileSize;
-                
-                //Because the player is ready to move there, we can set isMoving to true!
-                this.isMoving = true;
-            }
+    hasPlayerReachedJumpHeight() {
+        if (this.yPos === this.jumpTarget) { //Check if max height of jump reached
+            //console.log("jump height reached");
+            this.isFalling = true;
+            this.isJumping = false;
         }
     }
 
-    move() {
-        //This is in our draw loop, so called move() is called every frame BUT...
-        if (this.isMoving) {
-            //this code block will only activate when this.isMoving = true. Otherwise, nothing happens.
-            //So first, start by moving in direction set by setDirection()
-            this.xPos += this.speed * this.dirX;
-            this.yPos += this.speed * this.dirY;
+    setYDirection() {
+        if (this.isGrounded) {
+            this.dirY = 0;
+        }
+        
+        if (this.isJumping) {
+            this.dirY = -1;
+        }
 
-            //Now check if player has reached targetX
-            if (this.xPos === this.tx && this.yPos === this.ty) {
-                //if there, stop moving and reset our variables
-                this.isMoving = false;
-                this.dirX = 0;
-                this.dirY = 0;
-            }
+        if (this.isFalling) {
+            this.dirY = 1;
         }
     }
 
     display() {
         imageMode(CORNER);
         image(this.sprite, this.xPos, this.yPos, this.size, this.size);
+    }
+
+    debug() {
+        //COLLISION BOX
+        stroke(255,0,0); // red top
+        line(this.topLeft.x, this.topLeft.y, this.topRight.x, this.topRight.y);
+        stroke(34,139,34); // green bottom
+        line(this.bottomLeft.x, this.bottomLeft.y, this.bottomRight.x, this.bottomRight.y);
+        stroke(0,0,255); // blue left
+        line(this.topLeft.x, this.topLeft.y, this.bottomLeft.x, this.bottomLeft.y);
+        stroke(255,192,203); // pink right
+        line(this.topRight.x, this.topRight.y, this.bottomRight.x, this.bottomRight.y);
     }
 }
 
