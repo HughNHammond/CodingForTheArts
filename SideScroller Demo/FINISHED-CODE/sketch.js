@@ -101,7 +101,7 @@ function keyPressed() { //this will trigger every time a key is presed
         //Check if key is space bar (our jump button).
         if (key === " ") {
             player.isJumping = true;
-            player.jumpTarget = player.yPos - player.jumpDistance;
+            player.jumpTarget = player.yPos - player.jumpHeight;
             console.log(player.jumpTarget);
         }
     }
@@ -164,11 +164,14 @@ class Player {
     }
 
     update() { // CALLED FROM DRAW() ABOVE SO CODE WILL RUN ONCE PER FRAME
-        this.trackCorners();
-        this.hasPlayerReachedJumpHeight();
-        this.handleCollisions();
-        this.move();
-        
+        //MOVEMENT CODE
+        this.trackCorners(); // Check current position of corners each frame
+        this.setXDirection(); // Check if the player is pressing a or d, then set dirX
+        this.hasPlayerReachedJumpHeight(); // Check is player has reached jump height and should start falling
+        this.handleCollisions(); // Chek collisions on x then y axis
+        this.move(); // move the damn thing
+
+        //Display and Debug
         this.display();
         this.debug();
     }
@@ -207,6 +210,20 @@ class Player {
         }
     }
 
+    setXDirection() {
+        if (keyIsDown("65")) { // 'a' key
+            this.dirX = -1; // left
+        }
+
+        if (keyIsDown("68")) { // 'd' key 
+            this.dirX = 1; // right
+        }
+
+        if (!keyIsDown("65") && !keyIsDown("68")) { // no key
+            this.dirX = 0; // stop movement
+        }
+    }
+
     setYDirection() {
         if (this.isGrounded) {
             this.dirY = 0;
@@ -230,6 +247,13 @@ class Player {
         let velX = this.dirX * this.xSpeed;
         let velY = this.dirY * this.ySpeed;
 
+        //CHECK X AXIS
+        if (this.checkCollisions(velX, 0)) {
+            //console.log("collision on x axis");
+            this.dirX = 0;
+            velX = this.dirX * this.xSpeed;
+        }
+
         //check for collisions on top
         if (this.isOverlappingCollisionTile(this.topLeft.x, this.topLeft.y + velY) ||
             this.isOverlappingCollisionTile(this.topRight.x, this.topRight.y + velY)) {
@@ -241,6 +265,13 @@ class Player {
             this.setYDirection();
             velY = this.dirY * this.ySpeed;
         }
+
+            //If player is clipped into ground, push them up!
+            if (this.isOverlappingGroundTile(this.bottomRight.x, this.bottomRight.y) ||
+                this.isOverlappingGroundTile(this.bottomLeft.x, this.bottomLeft.y)) { 
+                //console.log("CORNERS COLLISION")
+                this.yPos -= this.ySpeed;
+            }
 
 
         //Get Coordinates of tiles below
@@ -268,6 +299,7 @@ class Player {
 
     move() {
         this.yPos += this.ySpeed * this.dirY;
+        this.xPos += this.xSpeed * this.dirX;
     }
 
 

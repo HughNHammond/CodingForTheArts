@@ -196,17 +196,19 @@ class Player {
     }
     
     setXDirection() {
-        if (keyIsDown("65")) {
-            this.dirX = -1;
+        if (keyIsDown("65")) { // 'a' key
+            this.dirX = -1; //left
         }
 
-        if (keyIsDown("68")) {
-            this.dirX = 1;
+        if (keyIsDown("68")) { // 'd' key
+            this.dirX = 1; // right
         }
 
-        if (!keyIsDown("65") && !keyIsDown("68")) {
-            this.dirX = 0;
+        if (!keyIsDown("65") && !keyIsDown("68")) { // no key
+            this.dirX = 0; //stop
         }
+
+        //YOU COULD ADD ANOTHER IF STATEMENT THAT SETS BEHAVIOUR IF BOTH KEYS ARE DOWN!
     }
 
     hasPlayerReachedJumpHeight() {

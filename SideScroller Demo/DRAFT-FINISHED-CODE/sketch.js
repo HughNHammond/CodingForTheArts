@@ -159,10 +159,11 @@ class Player {
     }
 
     update() {
-        this.trackCorners();
-        this.setXDirection();
-        this.hasPlayerReachedJumpHeight();
-        this.collisions();
+        //MOVEMENT CODE
+        this.trackCorners(); // Check current position of corners each frame
+        this.setXDirection(); // Check if the player is pressing a or d, then set dirX
+        this.hasPlayerReachedJumpHeight(); // Check is player has reached jump height and should start falling
+        this.collisions(); // 
         this.move();
 
         this.display();
@@ -242,7 +243,7 @@ class Player {
                 velY = this.dirY * this.ySpeed;
         }
 
-        
+        //If player is clipped into ground, push them up!
         if (this.isOverlappingGroundTile(this.bottomRight.x, this.bottomRight.y) ||
             this.isOverlappingGroundTile(this.bottomLeft.x, this.bottomLeft.y)) {
                 //console.log("CORNERS COLLISION")
@@ -250,7 +251,7 @@ class Player {
         }
         
         
-
+        
         //Get Coordinates of tiles below
         if (this.isOverlappingGroundTile(this.bottomLeft.x, this.bottomLeft.y + 1) ||
             this.isOverlappingGroundTile(this.bottomRight.x, this.bottomRight.y + 1)) {
