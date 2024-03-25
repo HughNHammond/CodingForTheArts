@@ -70,7 +70,7 @@ class Player {
     //the player is allowed to move there
     checkTargetTile() {
         //First, get what tile the player is currently on
-        this.across = Math.floor(this.xPos / this.tileSize);
+        this.across = Math.floor(this.XPos / this.tileSize);
         this.down = Math.floor(this.yPos / this.tileSize);
 
         //Calculate the coordinates of the target tile
