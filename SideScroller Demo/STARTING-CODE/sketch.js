@@ -39,7 +39,6 @@ let tileRules = [
 let player;
 let playerSprite;
 let playerSpeed = 5;
-let playerSize = tileSize;
 
 function preload() {
     //tilemap textures
@@ -71,7 +70,7 @@ function setup() {
     //Tile creation finished
 
     //Create Player
-    player = new Player(playerSprite, 3, 4, tileSize, playerSpeed, tileSize, tileRules);
+    player = new Player(playerSprite, 3, 4, playerSpeed, tileSize, tileRules);
 }
 
 function draw() {
@@ -96,7 +95,7 @@ function keyPressed() {
 }
 
 class Player {
-    constructor(sprite, startAcross, startDown, size, speed, tileSize, tileRules) {
+    constructor(sprite, startAcross, startDown, speed, tileSize, tileRules) {
         //Attach sprite to key in object
         this.sprite = sprite;
 
@@ -109,7 +108,11 @@ class Player {
         this.yPos = this.down * tileSize;
 
         //storing size and speed
-        this.size = size;
+        this.sizeX = tileSize;
+        this.sizeStandingY = tileSize * 2;
+        this.sizeCrouchingY = tileSize;
+        this.currentSizeY = this.sizeStandingY;
+
         this.speed = speed;
 
         //Check rules/collisions for the tile the player wants to move to (target Tile)
@@ -216,7 +219,7 @@ class Player {
 
     display() {
         imageMode(CORNER);
-        image(this.sprite, this.xPos, this.yPos, this.size, this.size);
+        image(this.sprite, this.xPos, this.yPos, this.sizeX, this.sizeStandingY);
     }
 }
 

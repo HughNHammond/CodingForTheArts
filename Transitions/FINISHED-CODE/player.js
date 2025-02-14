@@ -37,25 +37,25 @@ class Player {
             //if not, then let's set the direction the player is travelling!
 
             //UP
-            if (key === "w") {
+            if (keyIsDown(87)) {
                 this.dirX = 0;
                 this.dirY = -1; //direction is up!
             }
 
             //DOWN
-            if (key === "s") {
+            if (keyIsDown(83)) {
                 this.dirX = 0;
                 this.dirY = 1; //direction is down!
             }
 
             //LEFT
-            if (key === "a") {
+            if (keyIsDown(65)) {
                 this.dirX = -1; //direction is left!
                 this.dirY = 0; 
             }
 
             //RIGHT
-            if (key === "d") {
+            if (keyIsDown(68)) {
                 this.dirX = 1; //direction is right!
                 this.dirY = 0;
             }

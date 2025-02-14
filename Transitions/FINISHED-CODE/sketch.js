@@ -4,7 +4,7 @@ let numDown = 10;
 let numAcross = 10;
 let tileSize = 50;
 let textures = [];
-let currentLevel = entranceObject;
+let currentLevel;
 
 //VARIABLES TO STORE ASSETS
 let grassyTexture;
@@ -16,7 +16,7 @@ let doorTexture;
 //INITIALISE VARIABLES FOR PLAYER
 let player;
 let playerSprite;
-let playerSpeed = 10;
+let playerSpeed = 5;
 let playerSize = tileSize;
 let startAcross = 3;
 let startDown = 4;
@@ -42,7 +42,7 @@ function setup() {
     createCanvas(500, 500);
     
     //SETUP STARTING LEVEL (LEVEL 1)
-    loadLevel(currentLevel);
+    loadLevel(entranceObject);
 
     //TILE CREATION
     createTileMap();
@@ -66,6 +66,7 @@ function draw() {
 
     //Player methods we want to run once per frame
     player.display();
+    player.setDirection();
     player.move();
 }
 

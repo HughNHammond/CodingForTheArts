@@ -1,7 +1,7 @@
 //INITIALISE VARIABLES
 let tilemap = [];
-let numDown = 10;
-let numAcross = 10;
+let tilesX = 10;
+let tilesY = 10;
 let tileSize = 50;
 let textures = [];
 
